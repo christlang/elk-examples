@@ -6,7 +6,7 @@ services:
     ports:
       - "9200:9200"
     environment:
-      discovery-type: single-node
+      discovery.type: single-node
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.7.0
