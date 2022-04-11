@@ -3,3 +3,10 @@
 example for logging with elk-stack (even if logstash is not used at the moment)
 
 image::overview.dio.png[]
+
+=== testing with start.sh
+
+[source,shell script]
+----
+./start.sh
+----
