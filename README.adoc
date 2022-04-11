@@ -10,3 +10,10 @@ image::overview.dio.png[]
 ----
 ./start.sh
 ----
+
+* http://localhost:5601/app/kibana#/home
+* create index: http://localhost:5601/app/kibana#/management/kibana/index_pattern?_g=()
+** Index pattern: filebeat-*
+** Next Step
+** time Filter field name: @timestamp
+** Create index pattern

@@ -34,6 +34,8 @@ services:
     ports:
       - "8081:8080"
     command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat: "true"
 
   service-b:
     restart: on-failure
@@ -44,6 +46,8 @@ services:
     ports:
       - "8082:8080"
     command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat: "true"
 
   service-c:
     restart: on-failure
@@ -54,5 +58,7 @@ services:
     ports:
       - "8083:8080"
     command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat: "true"
 
 
