@@ -13,8 +13,8 @@ filebeat.autodiscover:
               paths:
                 - "/var/lib/docker/containers/${data.docker.container.id}/*.log"
               multiline.type: pattern
-              multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
-              multiline.negate: false
+              multiline.pattern: '^(\d\d\d\d-\d\d-\d\d ).*$'
+              multiline.negate: true
               multiline.match: after
 
 output.elasticsearch:

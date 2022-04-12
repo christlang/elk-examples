@@ -1,3 +1,5 @@
+:toc:
+
 == elk-examples
 
 example for logging with elk-stack (even if logstash is not used at the moment)
@@ -29,9 +31,16 @@ image::overview.dio.png[]
 * [.line-through]#ssl for all connections#
 * [.line-through]#ids for different sources of logs#
 * [.line-through]#use simple logs (no json)#
-* bring together multi-line logs (stack-traces)
+* [.line-through]#bring together multi-line logs (stack-traces)#
 * use structured logs (json)
 * add metrics
 * distributed tracing (services calling each other)
 * check ssl-certificates
 * reduce manual steps (more docker envs)
+
+
+== filebeat-config
+
+=== multiline-pattern
+
+* https://www.alibabacloud.com/blog/conveniently-configure-filebeat-to-ship-multiline-logs_597454
