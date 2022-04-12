@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{ISO8601} %-5level [%t] %C{1.}: %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <!-- LOG everything at info level -->
+    <root level="info">
+        <appender-ref ref="Console" />
+    </root>
+
+    <!-- LOG "de.cutl.cl*" at TRACE level -->
+    <logger name="de.cutl.cl" level="trace" additivity="false">
+        <appender-ref ref="Console" />
+    </logger>
+</configuration>

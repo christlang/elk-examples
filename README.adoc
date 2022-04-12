@@ -15,11 +15,16 @@ image::overview.dio.png[]
 
 * http://localhost:5601/app/kibana#/home
 * create data view: http://localhost:5601/app/management/kibana/dataViews
-** Create data view
+* Create data view for system-1
 ** name: `system-1-*`
 ** Timestamp field: `@timestamp`
 ** Create data view
+* Create data view for system-2
+** name: `system-2-*`
+** Timestamp field: `@timestamp`
+** Create data view
 * Discover Data: http://localhost:5601/app/discover
+** login with elastic/changeme (see start.sh)
 * example requests
 ** `message:*`
 * produce some logs: http://localhost:8081/

@@ -35,7 +35,7 @@ services:
       - "8081:8080"
     command: mvn clean spring-boot:run
     labels:
-      collect_logs_with_filebeat: "true"
+      collect_logs_with_filebeat_s1: "true"
 
   s1-service-b:
     restart: on-failure
@@ -47,7 +47,7 @@ services:
       - "8082:8080"
     command: mvn clean spring-boot:run
     labels:
-      collect_logs_with_filebeat: "true"
+      collect_logs_with_filebeat_s1: "true"
 
   s1-service-c:
     restart: on-failure
@@ -59,6 +59,49 @@ services:
       - "8083:8080"
     command: mvn clean spring-boot:run
     labels:
-      collect_logs_with_filebeat: "true"
+      collect_logs_with_filebeat_s1: "true"
 
+  filebeat-system-2:
+    image: docker.elastic.co/beats/filebeat:8.1.2
+    volumes:
+      - ./system-2/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro            # Docker logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro                        # Additional information about containers
+    user: root  # needed to access container logs
+    restart: on-failure
 
+  s2-service-d:
+    restart: on-failure
+    build: system-2/service-d
+    working_dir: /app
+    volumes:
+      - ./system-2/service-d:/app
+    ports:
+      - "8091:8080"
+    command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat_s2: "true"
+
+  s2-service-e:
+    restart: on-failure
+    build: system-2/service-e
+    working_dir: /app
+    volumes:
+      - ./system-2/service-e:/app
+    ports:
+      - "8092:8080"
+    command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat_s2: "true"
+
+  s2-service-f:
+    restart: on-failure
+    build: system-2/service-f
+    working_dir: /app
+    volumes:
+      - ./system-2/service-f:/app
+    ports:
+      - "8093:8080"
+    command: mvn clean spring-boot:run
+    labels:
+      collect_logs_with_filebeat_s2: "true"

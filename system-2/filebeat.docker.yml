@@ -6,7 +6,7 @@ filebeat.autodiscover:
             contains:
               # # add labels: collect_logs_with_filebeat: "true"
               # to get logs from a service
-              container.labels.collect_logs_with_filebeat_s1: "true"
+              container.labels.collect_logs_with_filebeat_s2: "true"
           config:
             - type: container
               format: docker
@@ -22,8 +22,8 @@ output.elasticsearch:
   ssl.verification_mode: none
   username: "elastic"
   password: "changeme"
-  index: "system-1-filebeat-%{[agent.version]}"
-setup.template.name: "system-1-filebeat"
-setup.template.pattern: "system-1-filebeat-%{[agent.version]}"
+  index: "system-2-filebeat-%{[agent.version]}"
+setup.template.name: "system-2-filebeat"
+setup.template.pattern: "system-2-filebeat-%{[agent.version]}"
 
 logging.metrics.enabled: false
