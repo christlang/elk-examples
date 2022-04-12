@@ -12,20 +12,24 @@ image::overview.dio.png[]
 ----
 
 * http://localhost:5601/app/kibana#/home
-* create index: http://localhost:5601/app/kibana#/management/kibana/index_pattern?_g=()
-** Index pattern: filebeat-*
-** Next Step
-** time Filter field name: @timestamp
-** Create index pattern
+* create data view: http://localhost:5601/app/management/kibana/dataViews
+** Create data view
+** name: `filebeat-*`
+** Timestamp field: `@timestamp`
+** Create data view
+* Discover Data: http://localhost:5601/app/discover
+* example requests
+** `message:*`
 
 
 === TODOs
 
+* [.line-through]#update to 8.1.2#
+* [.line-through]#protect elasticsearch / kibana with passwords#
+* [.line-through]#ssl for all connections#
 * ids for different sources of logs
 * use simple logs (no json)
 * use structured logs (json)
-* update to 8.1.2
 * add metrics
-* protect elasticsearch / kibana with passwords
-* ssl for all connections
 * distributed tracing (services calling each other)
+* check ssl-certificates
