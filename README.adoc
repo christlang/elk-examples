@@ -14,20 +14,20 @@ image::overview.dio.png[]
 * http://localhost:5601/app/kibana#/home
 * create data view: http://localhost:5601/app/management/kibana/dataViews
 ** Create data view
-** name: `filebeat-*`
+** name: `system-1-*`
 ** Timestamp field: `@timestamp`
 ** Create data view
 * Discover Data: http://localhost:5601/app/discover
 * example requests
 ** `message:*`
-
+* produce some logs: http://localhost:8081/
 
 === TODOs
 
 * [.line-through]#update to 8.1.2#
 * [.line-through]#protect elasticsearch / kibana with passwords#
 * [.line-through]#ssl for all connections#
-* ids for different sources of logs
+* [.line-through]#ids for different sources of logs#
 * use simple logs (no json)
 * use structured logs (json)
 * add metrics

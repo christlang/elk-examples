@@ -25,5 +25,8 @@ output.elasticsearch:
   ssl.verification_mode: none
   username: "elastic"
   password: "changeme"
+  index: "system-1-filebeat-%{[agent.version]}"
+setup.template.name: "system-1-filebeat"
+setup.template.pattern: "system-1-filebeat-%{[agent.version]}"
 
 logging.metrics.enabled: false
