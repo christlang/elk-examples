@@ -32,11 +32,13 @@ image::overview.dio.png[]
 * [.line-through]#ids for different sources of logs#
 * [.line-through]#use simple logs (no json)#
 * [.line-through]#bring together multi-line logs (stack-traces)#
+* [.line-through]#add program/service names#
 * use structured logs (json)
 * add metrics
 * distributed tracing (services calling each other)
 * check ssl-certificates
 * reduce manual steps (more docker envs)
+* add some visualization of errors
 
 
 == filebeat-config
@@ -44,3 +46,9 @@ image::overview.dio.png[]
 === multiline-pattern
 
 * https://www.alibabacloud.com/blog/conveniently-configure-filebeat-to-ship-multiline-logs_597454
+
+=== kibana
+
+* interesting fields:
+** container.image.name
+** message
