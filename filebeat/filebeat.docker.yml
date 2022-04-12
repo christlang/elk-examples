@@ -12,13 +12,6 @@ filebeat.autodiscover:
               format: docker
               paths:
                 - "/var/lib/docker/containers/${data.docker.container.id}/*.log"
-              processors:
-                - decode_json_fields:
-                    when.equals:
-                      docker.container.labels.decode_log_event_to_json_object: "true"
-                    fields: ["message"]
-                    target: ""
-                    overwrite_keys: true
 
 output.elasticsearch:
   hosts: ["https://elasticsearch:9200"]
