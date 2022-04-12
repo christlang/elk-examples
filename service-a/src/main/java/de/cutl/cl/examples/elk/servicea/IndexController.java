@@ -10,7 +10,11 @@ public class IndexController {
 
     @GetMapping("/")
     public String index() {
-        log.info("called index");
+        log.trace("trace index");
+        log.debug("debug index");
+        log.info("info index");
+        log.warn("warn index");
+        log.error("error index", new RuntimeException("this is a example"));
         return "index";
     }
 }
