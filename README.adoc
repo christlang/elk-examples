@@ -21,9 +21,11 @@ image::overview.dio.png[]
 
 === TODOs
 
+* ids for different sources of logs
+* use simple logs (no json)
+* use structured logs (json)
 * update to 8.1.2
 * add metrics
 * protect elasticsearch / kibana with passwords
 * ssl for all connections
-* ids for different sources of logs
 * distributed tracing (services calling each other)
