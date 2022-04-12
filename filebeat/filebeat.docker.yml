@@ -12,6 +12,10 @@ filebeat.autodiscover:
               format: docker
               paths:
                 - "/var/lib/docker/containers/${data.docker.container.id}/*.log"
+              multiline.type: pattern
+              multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+              multiline.negate: false
+              multiline.match: after
 
 output.elasticsearch:
   hosts: ["https://elasticsearch:9200"]
