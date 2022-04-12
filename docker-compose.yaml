@@ -16,45 +16,45 @@ services:
     depends_on:
       - elasticsearch
 
-  filebeat:
+  filebeat-system-1:
     image: docker.elastic.co/beats/filebeat:8.1.2
     volumes:
-      - ./filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
+      - ./system-1/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
       - /var/lib/docker/containers:/var/lib/docker/containers:ro            # Docker logs
       - /var/run/docker.sock:/var/run/docker.sock:ro                        # Additional information about containers
     user: root  # needed to access container logs
     restart: on-failure
 
-  service-a:
+  s1-service-a:
     restart: on-failure
-    build: service-a
+    build: system-1/service-a
     working_dir: /app
     volumes:
-      - ./service-a:/app
+      - ./system-1/service-a:/app
     ports:
       - "8081:8080"
     command: mvn clean spring-boot:run
     labels:
       collect_logs_with_filebeat: "true"
 
-  service-b:
+  s1-service-b:
     restart: on-failure
-    build: service-b
+    build: system-1/service-b
     working_dir: /app
     volumes:
-      - ./service-b:/app
+      - ./system-1/service-b:/app
     ports:
       - "8082:8080"
     command: mvn clean spring-boot:run
     labels:
       collect_logs_with_filebeat: "true"
 
-  service-c:
+  s1-service-c:
     restart: on-failure
-    build: service-c
+    build: system-1/service-c
     working_dir: /app
     volumes:
-      - ./service-c:/app
+      - ./system-1/service-c:/app
     ports:
       - "8083:8080"
     command: mvn clean spring-boot:run
