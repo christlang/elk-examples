@@ -24,6 +24,8 @@ services:
     restart: on-failure
     env_file:
       - .env
+    command:
+      - setup
 
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:$ELASTICSEARCH_VERSION
@@ -37,6 +39,8 @@ services:
     restart: on-failure
     env_file:
       - .env
+    command:
+      - setup
 
   filebeat-system-1:
     image: docker.elastic.co/beats/filebeat:$ELASTICSEARCH_VERSION
