@@ -1,29 +1,31 @@
 version: '3.8'
 
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.2
-    ports:
-      - "9200:9200"
-    environment:
-      discovery.type: single-node
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.1.2
-    ports:
-      - "5601:5601"
-    restart: on-failure
-    depends_on:
-      - elasticsearch
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:$ELASTICSEARCH_VERSION
+#    ports:
+#      - "9200:9200"
+#    environment:
+#      discovery.type: single-node
+#
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:$ELASTICSEARCH_VERSION
+#    ports:
+#      - "5601:5601"
+#    restart: on-failure
+#    depends_on:
+#      - elasticsearch
 
   filebeat-system-1:
-    image: docker.elastic.co/beats/filebeat:8.1.2
+    image: docker.elastic.co/beats/filebeat:$ELASTICSEARCH_VERSION
     volumes:
       - ./system-1/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
       - /var/lib/docker/containers:/var/lib/docker/containers:ro            # Docker logs
       - /var/run/docker.sock:/var/run/docker.sock:ro                        # Additional information about containers
     user: root  # needed to access container logs
     restart: on-failure
+    env_file:
+      - .env
 
   s1-service-a:
     restart: on-failure
@@ -62,13 +64,15 @@ services:
       collect_logs_with_filebeat_s1: "true"
 
   filebeat-system-2:
-    image: docker.elastic.co/beats/filebeat:8.1.2
+    image: docker.elastic.co/beats/filebeat:$ELASTICSEARCH_VERSION
     volumes:
       - ./system-2/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro  # Configuration file
       - /var/lib/docker/containers:/var/lib/docker/containers:ro            # Docker logs
       - /var/run/docker.sock:/var/run/docker.sock:ro                        # Additional information about containers
     user: root  # needed to access container logs
     restart: on-failure
+    env_file:
+      - .env
 
   s2-service-d:
     restart: on-failure

@@ -18,10 +18,9 @@ filebeat.autodiscover:
               multiline.match: after
 
 output.elasticsearch:
-  hosts: ["https://elasticsearch:9200"]
-  ssl.verification_mode: none
-  username: "elastic"
-  password: "changeme"
+  hosts: ["${ELASTICSEARCH_URL}"]
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
   index: "system-2-filebeat-%{[agent.version]}"
 setup.template.name: "system-2-filebeat"
 setup.template.pattern: "system-2-filebeat-%{[agent.version]}"
