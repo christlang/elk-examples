@@ -1,0 +1,57 @@
+# Setup: https://www.elastic.co/guide/en/beats/heartbeat/current/running-on-docker.html
+# Config: https://www.elastic.co/guide/en/beats/heartbeat/current/heartbeat-installation-configuration.html
+
+output.elasticsearch:
+  hosts: ["${ELASTICSEARCH_URL}"]
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  ssl:
+    enabled: true
+
+  setup.kibana:
+    host: "${KIBANA_URL}"
+    username: "${KIBANA_USERNAME}"
+    password: "$KIBANA_PASSWORD}"
+
+heartbeat.monitors:
+  - type: icmp
+    schedule: '*/5 * * * * * *'
+    hosts: ["localhost"]
+    id: my-icmp-service
+    name: My ICMP Service
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s1-service-a:8080"]
+    mode: any
+    id: service-a
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s1-service-b:8080"]
+    mode: any
+    id: service-b
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s1-service-c:8080"]
+    mode: any
+    id: service-c
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s2-service-d:8080"]
+    mode: any
+    id: service-d
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s2-service-e:8080"]
+    mode: any
+    id: service-e
+  - type: http
+    schedule: '@every 5s'
+    hosts: ["s2-service-f:8080"]
+    mode: any
+    id: service-f
+  - type: http
+    schedule: '@every 5s'
+    urls: ["http://example.net"]
+    service.name: apm-service-name
+    id: example-service
+    name: My HTTP Service
