@@ -1,0 +1,39 @@
+# Setup: https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html#_example_configuration_file
+# Config: https://raw.githubusercontent.com/elastic/beats/8.3/deploy/docker/metricbeat.docker.yml
+
+output.elasticsearch:
+  hosts: ["${ELASTICSEARCH_URL}"]
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  ssl:
+    enabled: true
+
+  setup.kibana:
+    host: "${KIBANA_URL}"
+    username: "${KIBANA_USERNAME}"
+    password: "$KIBANA_PASSWORD}"
+
+metricbeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    # Reload module configs as they change:
+    reload.enabled: false
+
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+metricbeat.modules:
+  - module: docker
+    metricsets:
+      - "container"
+      - "cpu"
+      - "diskio"
+      - "healthcheck"
+      - "info"
+      - "memory"
+      - "network"
+    hosts: ["unix:///var/run/docker.sock"]
+    period: 10s
+    enabled: true

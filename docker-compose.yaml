@@ -24,8 +24,19 @@ services:
     restart: on-failure
     env_file:
       - .env
-    command:
-      - setup
+
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:$ELASTICSEARCH_VERSION
+    volumes:
+      - ./configs/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
+    user: root # needed to access config
+    restart: on-failure
+    env_file:
+      - .env
 
   filebeat-system-1:
     image: docker.elastic.co/beats/filebeat:$ELASTICSEARCH_VERSION
